@@ -19,6 +19,8 @@ class Service extends Model
         'refill',
         'cancel',
         'category',
+        'commission_percentage',
+        'final_amount',
     ];
 
     protected $casts = [

@@ -17,13 +17,10 @@ class ServicesTable
             ->columns([
                 TextColumn::make('service_id')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('type')
-                    ->searchable(),
-                TextColumn::make('rate')
-                    ->prefix('$')
                     ->searchable(),
                 TextColumn::make('min')
                     ->numeric()
@@ -32,11 +29,14 @@ class ServicesTable
                     ->numeric()
                     ->sortable(),
                 IconColumn::make('dripfeed')
-                    ->boolean(),
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('refill')
-                    ->boolean(),
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('cancel')
-                    ->boolean(),
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('category')
                     ->searchable(),
                 TextColumn::make('created_at')
@@ -47,9 +47,6 @@ class ServicesTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
             ])
             ->recordActions([
                 EditAction::make(),
