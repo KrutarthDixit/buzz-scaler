@@ -6,6 +6,9 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -52,5 +55,25 @@ class User extends Authenticatable
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->hasAnyRole(['admin', 'manager']);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function wallet(): HasOne
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function walletTransactions(): HasManyThrough
+    {
+        return $this->hasManyThrough(WalletTransaction::class, Wallet::class);
     }
 }

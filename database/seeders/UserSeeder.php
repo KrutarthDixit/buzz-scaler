@@ -24,10 +24,14 @@ class UserSeeder extends Seeder
             'password' => bcrypt('manager'),
         ])->assignRole('manager');
 
-        User::create([
+        $customer = User::create([
             'name' => 'Customer',
             'email' => 'customer@gmail.com',
             'password' => bcrypt('customer'),
         ])->assignRole('customer');
+
+        $customer->wallet()->create([
+            'balance' => 0,
+        ]);
     }
 }
